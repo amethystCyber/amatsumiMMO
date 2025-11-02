@@ -2,6 +2,8 @@
 <head>
 <style>
 body{
+    display: flex;
+    flex-direction: column;
     gap: 20px;
 }
 #enter{
@@ -13,6 +15,7 @@ body{
     color: white;
     width: fit-content;
     height: fit-content;
+    margin-top: 20px;
 }
 #enter button{
     background-color: black;
@@ -42,19 +45,25 @@ body{
     height: fit-content;
     background-color: black;
     color: white;
+    align-items: center;
+    text-align: center;
 }
 </style>
 </head>
 <body>
+<h1>Amatsumi</h1>
+
+<p>online text-based mmo</p>
 
 <div id="enter">
+<p>Welcome to Amatsumi! Create a user or login to enter our world</p>
 <button>register</button>
 <button>login</button>
 </div>
 
 <div id="register">
 <form>
-    <p>create your user</p>
+    <p>Create your new user!</p>
 <label for="email" name="email">Email:</label>
 <input id="email" name="email">
 <label for="username">Username:</label>
@@ -66,7 +75,7 @@ body{
 
 <div id="login">
 <form>
-    <p>welcome back! please log in</p>
+    <p>Welcome back! Please log in</p>
 <label for="username">Username:</label>
 <input id="username" name="username">
 <label for="password">Password:</label>
