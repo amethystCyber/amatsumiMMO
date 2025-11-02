@@ -40,6 +40,7 @@ body{
     align-items: center;
     text-align: center;
     border: solid 1px white;
+    position: relative;
 }
 #login form{
     display: flex;
@@ -53,12 +54,18 @@ body{
     align-items: center;
     text-align: center;
     border: solid 1px white;
+    position: relative;
 }
 #register{
     display: none;
 }
 #login{
     display: none;
+}
+.formBtn{
+    position: absolute;
+    top: 3%;
+    right: 3%;
 }
 </style>
 </head>
@@ -75,7 +82,7 @@ body{
 
 <div id="register">
 <form>
-    <button onclick="closeRegisterForm()">X</button>
+    <button class="formBtn" onclick="closeRegisterForm()">X</button>
     <p>Create your new user!</p>
 <label for="email" name="email">Email:</label>
 <input id="email" name="email">
@@ -88,7 +95,7 @@ body{
 
 <div id="login">
 <form>
-    <button onclick="closeLoginForm()">X</button>
+    <button class="formBtn" onclick="closeLoginForm()">X</button>
     <p>Welcome back! Please log in</p>
 <label for="username">Username:</label>
 <input id="username" name="username">
