@@ -19,7 +19,6 @@ body{
     color: white;
     width: fit-content;
     height: fit-content;
-    margin-top: 20px;
     border: solid 1px white;
 }
 #enter button{
@@ -64,12 +63,13 @@ body{
 
 <div id="enter">
 <p>Welcome to Amatsumi! Create a user or login to enter our world</p>
-<button>register</button>
-<button>login</button>
+<button onclick="openRegisterForm()">register</button>
+<button onclick="openLoginForm()">login</button>
 </div>
 
 <div id="register">
 <form>
+    <button onclick="closeRegisterForm()">X</button>
     <p>Create your new user!</p>
 <label for="email" name="email">Email:</label>
 <input id="email" name="email">
@@ -82,6 +82,7 @@ body{
 
 <div id="login">
 <form>
+    <button onclick="closeLoginForm()">X</button>
     <p>Welcome back! Please log in</p>
 <label for="username">Username:</label>
 <input id="username" name="username">
@@ -89,6 +90,28 @@ body{
 <input id="password" name="password">
 </form>
 </div>
+
+<script>
+closeLoginForm();
+closeRegisterForm();
+
+
+function showRegisterForm(){
+    document.getElementById('register').style.display = "block";
+}
+
+function closeRegisterForm(){
+    document.getElementById('register').style.display = "none";
+}
+
+function showLoginForm(){
+    document.getElementById('login').style.display = "block";
+}
+
+function closeLoginForm(){
+    document.getElementById('login').style.display = "none";
+}
+</script>
 
 </body>
 </html>
