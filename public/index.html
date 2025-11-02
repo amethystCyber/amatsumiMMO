@@ -64,7 +64,7 @@ body{
 #login{
     display: none;
 }
-.formBtn{
+.closeBtn{
     position: absolute;
     top: 3%;
     right: 3%;
@@ -83,26 +83,34 @@ body{
 </div>
 
 <div id="register">
-<form>
-    <button class="formBtn" onclick="closeRegisterForm()">X</button>
-    <p>Create your new user!</p>
+<form method="post" action="/register">
+
+<button type="button" class="closeBtn" onclick="closeRegisterForm()">X</button>
+
+<p>Create your new user!</p>
+
 <label for="email" name="email">Email:</label>
-<input id="email" name="email">
+<input id="register-email" name="email">
+
 <label for="username">Username:</label>
-<input id="username" name="username">
+<input id="register-username" name="username">
+
 <label for="password">Password:</label>
-<input id="password" name="password">
+<input id="register-password" type="password" name="password">
 </form>
 </div>
 
 <div id="login">
-<form>
-    <button class="formBtn" onclick="closeLoginForm()">X</button>
-    <p>Welcome back! Please log in</p>
+<form method="post" action="/login">
+<button type="button" class="closeBtn" onclick="closeLoginForm()">X</button>
+
+<p>Welcome back! Please log in</p>
+
 <label for="username">Username:</label>
-<input id="username" name="username">
+<input id="login-username" name="username">
+
 <label for="password">Password:</label>
-<input id="password" name="password">
+<input id="login-password" name="password">
 </form>
 </div>
 
