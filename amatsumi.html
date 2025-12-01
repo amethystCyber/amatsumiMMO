@@ -1,104 +1,30 @@
+<!DOCTYPE html>
 <html>
-<head>
-<style>
-body{
-    background-color: rgb(180, 150, 115);
-    display: flex;
-}
+  <head>
+    <meta charset="utf-8">
+    <title>A‑Frame Island Test</title>
+    <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+  </head>
+  <body>
+    <a-scene fog="type: exponential; color: #b9d9ff; density: 0.02">
+      <a-assets>
+        <img id="grass" src="textures/grass.png">
+        <img id="rock" src="textures/rock.png">
+      </a-assets>
 
-.playerBox{
-    height: 15vh;
-    width: 60vh;
-    position: relative;
-}
+      <a-sky color="#88CCFF"></a-sky>
 
-.playerContainer{
-    background-color: rgb(205, 183, 134);
-    border: solid 1px black;
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    font-size: 30px;
-}
-.health{
-    position: absolute;
-    right: 55%;
-    bottom: 1%;
-    margin-bottom: 0px;
-}
-.mana{
-    position: absolute;
-    right: 10%;
-    bottom: 1%;
-    margin-bottom: 0px;
+      <a-box 
+        position="0 1 -5" width="8" height="0.5" depth="8" 
+        material="src: #grass; repeat: 4 4">
+      </a-box>
 
-}
-.playerPicture{
-    position: absolute;
-    background-image: src("marcelo.png");
-    background-size: 100%;
-    background-repeat: no-repeat;
-    height: 100%;
-    width: 27%;
-}
-.name{
-    position: absolute;
-    top: 5%;
-    right: 54%;
-    margin-top: 0px;
-}
-</style>
-</head>
+      <a-box 
+        position="0 0.25 -5" width="8" height="0.5" depth="8"
+        material="src: #rock; repeat: 2 2">
+      </a-box>
 
-<body>
-
-<div class="playerBox">
-<div class="playerContainer">
-<div class="playerPicture"></div>
-<p class="name"><span id="playerName"></span></p>
-<p class="health">HP:<span id="playerHealth"></span></p>
-<p class="mana">MP:<span id="playerMana"></span></p>
-</div> <!--this is container-->
-</div>
-
-
-
-<script>
-
-let player = {
-    health: 100,
-    name: "Marcelo",
-    level: 1,
-    exp: 0,
-    attack: 3,
-    defense: 1,
-    mana: 20,
-    magicAttack: 1,
-    magicDefense: 1,
-    cash: 0
-}
-
-function updateHealth(){
-    document.getElementById('playerHealth').innerText = player.health;
-}
-
-function updateMana(){
-    document.getElementById('playerMana').innerText = player.mana;
-}
-
-function updateCash(){
-    document.getElementById('playerCash').innerText = player.cash;
-}
-
-function updateName(){
-    document.getElementById('playerName').innerText = player.name;
-}
-
-updateName();
-updateHealth();
-updateMana();
-updateCash();
-</script>
-</body>
-
+      <a-entity camera look-controls wasd-controls position="0 1.6 5"></a-entity>
+    </a-scene>
+  </body>
 </html>
