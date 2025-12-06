@@ -1,30 +1,35 @@
-<!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <title>A‑Frame Island Test</title>
-    <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
-  </head>
-  <body>
-    <a-scene fog="type: exponential; color: #b9d9ff; density: 0.02">
-      <a-assets>
-        <img id="grass" src="textures/grass.png">
-        <img id="rock" src="textures/rock.png">
-      </a-assets>
+<head>
 
-      <a-sky color="#88CCFF"></a-sky>
+</head>
+<body>
+<div id="gameSettings">
+<button>Pause</button>
+</div>
 
-      <a-box 
-        position="0 1 -5" width="8" height="0.5" depth="8" 
-        material="src: #grass; repeat: 4 4">
-      </a-box>
+<div id="turnElement">
+  <span id="whosTurn"></span>
+</div>
 
-      <a-box 
-        position="0 0.25 -5" width="8" height="0.5" depth="8"
-        material="src: #rock; repeat: 2 2">
-      </a-box>
+<div id="battleDisplay">
+<div id="playerBox"></div>
 
-      <a-entity camera look-controls wasd-controls position="0 1.6 5"></a-entity>
-    </a-scene>
-  </body>
+<div id="enemyBox"></div>
+</div>
+
+<div id="battleControls"></div>
+
+
+
+
+<script>
+let turn = "player";
+
+function updateTurn(){
+  document.getElementById('whosTurn').innerText = turn;
+}
+
+</script>
+
+</body>
 </html>
