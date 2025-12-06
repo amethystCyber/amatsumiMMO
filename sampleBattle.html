@@ -46,13 +46,8 @@ body{
   transform: translateX(-50%);
 }
 
-.playerTurn{
-  color: green;
-}
 
-.enemyTurn{
-  color: red;
-}
+
 
 
 
@@ -65,7 +60,7 @@ body{
   display: flex;
   transform: translateX(-50%);
   flex-direction: row;
-  width: 40%;
+  width: 60%;
   height: 20%;
   color: white;
   font-size: 24px;
@@ -88,13 +83,13 @@ body{
   transform: translateY(-50%);
 }
 #logElement{
-  border: solid 1px white;
+  border: none;
   color: white;
   width: 45%;
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
-  top: 10%;
+  top: 40%;
   text-align: center;
 }
 #battleControls{
@@ -161,7 +156,7 @@ body{
 
 
 <div id="battleControls">
-<button>attack</button>
+<button onclick="playerAttack()">attack</button>
 </div>
 
 
@@ -170,67 +165,73 @@ body{
 <script>
 let turn = "player";
 
-
-
 let player = {
-  hp: 100
+  hp: 100,
+  attack: 10
 }
-
-
 
 let enemy = {
-  hp: 50
+  hp: 50,
+  attack: 7
 }
-
-
-
-
 
 function updateTurn(){
   document.getElementById('whosTurn').innerText = "Turn: " + turn;
 }
 
-
-
-
 function updatePlayerHp(){
   document.getElementById('playerHp').innerText = "HP: " + player.hp;
 }
-
-
-
 
 function updateEnemyHp(){
   document.getElementById('enemyHp').innerText = "HP: " + enemy.hp;
 }
 
-
-
-function updateBattleLog(message){
-  document.getElementById('battleLog').innerText = message;
-}
-
 function playersTurn(){
-  updateBattleLog('It is now players turn');
-  document.getElementById('whosTurn').classList.toggle('playerTurn');
+turn = "player";
+updateTurn();
+document.getElementById("whosTurn").style.color = "green";
+document.getElementById("battleLog").innerText = " ";
 }
-
-
-
 
 function enemyTurn(){
-  turn = "enemy";
-  updateBattleLog('It is now enemy turn');
-  document.getElementById('whosTurn').classList.toggle('enemyTurn');
-  updateTurn();
+if (enemy.hp <= 0) {
+  document.getElementById("battleLog").innerText = "Player wins!";
+} else {
+
+turn = "enemy";
+updateTurn();
+document.getElementById("battleLog").innerText = "It is now enemys turn";
+document.getElementById("whosTurn").style.color = "red";
+setTimeout(enemyAttack, 1000);
+setTimeout(playersTurn, 2000);
+}
+}
+
+function playerAttack(){
+document.getElementById("battleLog").innerText = "Player attacks enemy!!";
+	enemy.hp -= player.attack;
+	updateEnemyHp();
+	setTimeout(enemyTurn, 1000);
+}
+
+function enemyAttack(){
+document.getElementById("battleLog").innerText = "Enemy attacks player!"
+	player.hp -= enemy.attack;
+	updatePlayerHp();
 }
 
 
 
-updateTurn();
 playersTurn();
+//this makes the turn "player"
+//this also changes the color of the turn elements text to green
+//and also makes the battle log say "It is players turn"
+
 updatePlayerHp();
+//players hp element setup
 updateEnemyHp();
+//enemys hp element setup
 </script>
 
 </body>
