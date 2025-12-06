@@ -1,23 +1,168 @@
 <html>
 <head>
+<style>
 
+
+
+body{
+  background-color: rgb(0, 62, 49);
+}
+
+
+
+#gameSettings{
+  border: solid 1px white;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(0, 17, 8);
+  height: 6%;
+}
+
+
+
+#gameSettings button{
+  background-color: black;
+  color: white;
+  border: none;
+  font-weight: bold;
+  font-size: 24px;
+}
+
+
+
+#turnElement{
+  background-color: solid 1px red;
+  background-color: black;
+  color: white;
+  border-radius: 5px;
+  width: fit-content;
+  padding: 10px;
+  font-size: 24px;
+  position: absolute;
+  left: 50%;
+  top: 10%;
+  transform: translateX(-50%);
+}
+
+.playerTurn{
+  color: green;
+}
+
+.enemyTurn{
+  color: red;
+}
+
+
+
+#battleDisplay{
+  border: none;
+  background-color: rgb(52, 0, 0);
+  position: absolute;
+  left: 50%;
+  top: 20%;
+  display: flex;
+  transform: translateX(-50%);
+  flex-direction: row;
+  width: 40%;
+  height: 20%;
+  color: white;
+  font-size: 24px;
+}
+
+#playerBox{
+  background-color: grey;
+  padding: 20px;
+  position: absolute;
+  left: 5%;
+  top: 50%;
+  transform: translateY(-50%);
+}
+#enemyBox{
+  background-color: red;
+  padding: 20px;
+  position: absolute;
+  right: 5%;
+  top: 50%;
+  transform: translateY(-50%);
+}
+#logElement{
+  border: solid 1px white;
+  color: white;
+  width: 45%;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 10%;
+  text-align: center;
+}
+#battleControls{
+  background-color: black;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 50%;
+  width: fit-content;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-items: center;
+}
+#battleControls button{
+  font-size: 24px;
+  border: none;
+  background-color: maroon;
+  color: white;
+  padding: 10px;
+  font-weight: bold;
+}
+</style>
 </head>
 <body>
+
+
+
 <div id="gameSettings">
+
 <button>Pause</button>
+
 </div>
+
+
+
 
 <div id="turnElement">
+
   <span id="whosTurn"></span>
+
 </div>
+
+
+
+
 
 <div id="battleDisplay">
-<div id="playerBox"></div>
 
-<div id="enemyBox"></div>
+<div id="playerBox">
+  <span id="playerHp"></span>
 </div>
 
-<div id="battleControls"></div>
+<div id="logElement"><span id="battleLog"></span></div>
+
+<div id="enemyBox">
+<span id="enemyHp"></span>
+</div>
+
+</div>
+
+
+
+
+<div id="battleControls">
+<button>attack</button>
+</div>
 
 
 
@@ -25,10 +170,67 @@
 <script>
 let turn = "player";
 
-function updateTurn(){
-  document.getElementById('whosTurn').innerText = turn;
+
+
+let player = {
+  hp: 100
 }
 
+
+
+let enemy = {
+  hp: 50
+}
+
+
+
+
+
+function updateTurn(){
+  document.getElementById('whosTurn').innerText = "Turn: " + turn;
+}
+
+
+
+
+function updatePlayerHp(){
+  document.getElementById('playerHp').innerText = "HP: " + player.hp;
+}
+
+
+
+
+function updateEnemyHp(){
+  document.getElementById('enemyHp').innerText = "HP: " + enemy.hp;
+}
+
+
+
+function updateBattleLog(message){
+  document.getElementById('battleLog').innerText = message;
+}
+
+function playersTurn(){
+  updateBattleLog('It is now players turn');
+  document.getElementById('whosTurn').classList.toggle('playerTurn');
+}
+
+
+
+
+function enemyTurn(){
+  turn = "enemy";
+  updateBattleLog('It is now enemy turn');
+  document.getElementById('whosTurn').classList.toggle('enemyTurn');
+  updateTurn();
+}
+
+
+
+updateTurn();
+playersTurn();
+updatePlayerHp();
+updateEnemyHp();
 </script>
 
 </body>
