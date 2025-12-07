@@ -1,0 +1,55 @@
+<html>
+<head>
+<style>
+body{
+    background-color: black;
+}
+#pause{
+    position: absolute;
+    top: 3%;
+    left: 50%;
+    transform: translateX(-50%);
+}
+.room{
+    border: none;
+    padding: 20px;
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 50%;
+    background-size: 50%;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 50%;
+}
+#town{
+    background-image: url('day1.jpg');
+}
+</style>
+</head>
+<body>
+<button id="pause">Pause</button>
+
+<div id="town" class="room"></div>
+
+<script>
+let gameState = {
+    playersName: "Marcelo",
+    hp: 100,
+    attack: 5,
+    defense: 1,
+    exp: 0,
+    level: 0
+}
+
+let rat = {
+    name: "Angry Rat",
+    hp: 40,
+    exp: 8,
+    gold: 6,
+    url: "rat.jpg"
+}
+</script>
+</body>
+</html>
