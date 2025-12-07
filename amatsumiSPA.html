@@ -2,14 +2,16 @@
 <head>
 <style>
 body{
-    background-color: black;
+    background-color: rosybrown;
+    background-size: 50%;
+    background-position: top center;
+    background-repeat: no-repeat;
 }
 /*pause menu UI*/
 #pause{
     position: absolute;
     top: 3%;
-    left: 50%;
-    transform: translateX(-50%);
+    right: 5%;
     font-size: 30px;
     background-color: thistle;
     color: darkslategray;
@@ -124,30 +126,6 @@ flex-direction: row;
   font-size: 30px;
 }
 
-
-/*room UI*/
-.room{
-    border: none;
-    padding: 20px;
-    position: absolute;
-    top: 10%;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 50%;
-    background-size: 50%;
-    background-repeat: no-repeat;
-    background-position: center;
-    height: 50%;
-    z-index: 1;
-}
-#town{
-    background-image: url('day1.jpg');
-    display: none;
-}
-#bedroom{
-    background-image: url('bedroom.jpg');
-    display: none;
-}
 /*Navbox UI*/
 #navBox{
   background-color: thistle;
@@ -158,9 +136,8 @@ flex-direction: row;
   flex-direction: column;
   width: fit-content;
   position: absolute;
-  top: 70%;
-  left: 50%;
-  transform: translateX(-50%);
+  top: 20%;
+  left: 3%;
   color: darkslategray;
   font-weight: bold;
   border: solid 1px white;
@@ -204,19 +181,13 @@ flex-direction: row;
 
 </div>
 
-<!--these will be rooms-->
-<div id="town" class="room"></div>
-<div id="bedroom" class="room"></div>
-
 <!--room navigation-->
 <div id="navBox">
-<button onclick="enterRoom('town')">Go to town</button>
-<button onclick="enterRoom('bedroom')">Go to bedroom</button>
+<button onclick="goToRoom('town')">Go to town</button>
+<button onclick="goToRoom('bedroom')">Go to bedroom</button>
 </div>
 
-
 <script>
-//By default we can enter in a bedroom, regardless of what room you saved in
 let gameState = {
     playersName: "Marcelo",
     hp: 100,
@@ -224,8 +195,8 @@ let gameState = {
     defense: 1,
     mp: 10,
     gold: 0,
+    currentroom: "",
     exp: 0,
-    currentroom: "bedroom",
     level: 0
 }
 
@@ -296,33 +267,41 @@ function closePause(){
 document.getElementById('pauseMenu').style.display = "none";
 }
 
-function enterRoom(roomname){
-gameState.currentroom = roomname;
-
-  // hide all rooms
-  document.querySelectorAll(".room").forEach(div => {
-    div.style.display = "none";
-  });
-
-
-let room = document.getElementById(roomname);
-if (room){
-    room.style.display = "block";
-}
-saveGame();
-console.log(`Current Room: ${gameState.currentroom}`)
-}
-
 function loadPlayerBox(){
   document.getElementById('playerBoxHp').innerText = `HP: ${gameState.hp}`;
   document.getElementById('playerBoxMp').innerText = `MP: ${gameState.mp}`;
 }
-//load the saved room on startup
-enterRoom(gameState.currentroom);
-//if no current room we go to bedroom
-if (!gameState.currentroom){
-  enterRoom('bedroom');
+
+
+function goToRoom(roomname){
+  //first we clear the previous room
+  document.body.style.backgroundImage = "none";
+
+  //set the current room in game state
+  gameState.currentroom = roomname;
+
+  //log whats going on
+  console.log('goToRoom function activated');
+  console.log('requested room:');
+  console.log(gameState.currentroom);
+  
+  //if im going to town then the background becomes town
+  if (gameState.currentroom === "town"){
+  document.body.style.backgroundImage = "url('day1.jpg')";
 }
+
+  if (gameState.currentroom === "bedroom"){
+  document.body.style.backgroundImage = "url('bedroom.jpg')";
+}
+
+saveGame();
+} 
+
+
+
+
+
+
 pauseStatsSetup();
 loadPlayerBox();
 </script>
