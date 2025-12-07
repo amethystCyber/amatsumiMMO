@@ -4,17 +4,111 @@
 body{
     background-color: black;
 }
+/*pause menu UI*/
 #pause{
     position: absolute;
     top: 3%;
     left: 50%;
     transform: translateX(-50%);
+    font-size: 30px;
 }
+#pauseMenu{
+border: solid 1px white;
+background-color: black;
+width: 50%;
+height: 50%;
+z-index: 20;
+position: absolute;
+left: 50%;
+top: 15%;
+transform: translateX(-50%);
+font-size: 30px;
+color: white;
+display: none;
+flex-direction: row;
+}
+#closePause{
+    position: absolute;
+    right: 0%;
+    top: 0%;
+    background-color: black;
+    color: white;
+    font-size: 30px;
+}
+#playerStats{
+    width: 50%;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+#playerImg{
+    scale: 50%;
+    margin-top: -30%;
+    margin-bottom: -37%;
+}
+#dataCenter{
+    border: solid 1px pink;
+    background-color: darkslategray;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+#dataCenter button{
+    background-color: black;
+    color: white;
+    font-size: 30px;
+    margin-bottom: 2%;
+}
+
+/*playerBox top left*/
+#playerBox{
+  position: relative;
+  top: 0%;
+  left: 0%;
+  background-color: black;
+  width: 30%;
+  height: 15%;
+  border: solid 1px white;
+}
+#playerBoxPic{
+  scale: 25%;
+  margin: -180 -180 -180 -180;
+}
+#playerBoxHp{
+  height: 50%;
+  position: absolute;
+  right: 0%;
+  top: 0%;
+  width: 65%;
+}
+#playerBoxMp{
+  height: 50%;
+  position: absolute;
+  right: 0%;
+  top: 50%;
+  width: 65%;
+}
+#playerBoxHpPic{
+  scale: 20%;
+  margin: -175 -160 -200 -200;
+}
+#playerBoxMpPic{
+  scale: 28%;
+  margin: -137 -150 -170 -160;
+}
+
+
+
+/*room UI*/
 .room{
     border: none;
     padding: 20px;
     position: absolute;
-    top: 30%;
+    top: 10%;
     left: 50%;
     transform: translateX(-50%);
     width: 50%;
@@ -22,24 +116,92 @@ body{
     background-repeat: no-repeat;
     background-position: center;
     height: 50%;
+    z-index: 1;
 }
 #town{
     background-image: url('day1.jpg');
+    display: none;
+}
+#bedroom{
+    background-image: url('bedroom.jpg');
+    display: none;
+}
+/*Navbox UI*/
+#navBox{
+  background-color: black;
+  padding: 20px;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  width: fit-content;
+  position: absolute;
+  top: 60%;
+  left: 50%;
+  transform: translateX(-50%);
+  color: white;
+  font-weight: bold;
+  border: solid 1px white;
+}
+#navBox button{
+  background-color: white;
+  color: black;
+  font-weight: bolder;
+  font-size: 30px;
+  margin-bottom: 10px;
 }
 </style>
 </head>
 <body>
-<button id="pause">Pause</button>
+<!--pause menu-->
+<button onclick="openPause()" id="pause">Pause</button>
+<div id="pauseMenu">
+<button onclick="closePause()" id="closePause">X</button>
+<div id="playerStats">
+<img id="playerImg" src="bodyCelo.png">
+<span id="pauseStats"></span>
+</div>
+<div id="dataCenter">
+<button onclick="saveGame()">save game</button>
+<button onclick="loadGame()">load game</button>
+<button onclick="deleteSave()">erase game</button>
+</div>
+</div>
 
+<div id="playerBox">
+<img id="playerBoxPic" src="marcelo.png">
+<div id="playerBoxHpBox">
+<img id="playerBoxHpPic" src="heart.png">
+<span id="playerBoxHp"></span>
+</div>
+<div id="playerBoxMpBox">
+<img id="playerBoxMpPic" src="mp.png">
+<span id="playerBoxMp"></span>
+</div>
+</div>
+
+<!--these will be rooms-->
 <div id="town" class="room"></div>
+<div id="bedroom" class="room"></div>
+
+<!--room navigation-->
+<div id="navBox">
+<button onclick="enterRoom('town')">Go to town</button>
+<button onclick="enterRoom('bedroom')">Go to bedroom</button>
+</div>
+
 
 <script>
+//By default we can enter in a bedroom, regardless of what room you saved in
 let gameState = {
     playersName: "Marcelo",
     hp: 100,
     attack: 5,
     defense: 1,
+    mp: 10,
+    gold: 0,
     exp: 0,
+    currentroom: "bedroom",
     level: 0
 }
 
@@ -50,6 +212,95 @@ let rat = {
     gold: 6,
     url: "rat.jpg"
 }
+
+const sumiKey = "AmatsumiV1Save";
+
+function saveGame() {
+  try {
+    const data = JSON.stringify(gameState);
+    localStorage.setItem(sumiKey, data);
+    console.log("Game saved.");
+  } catch (err) {
+    console.error("Save failed:", err);
+  }
+}
+
+function loadGame() {
+  try {
+    const raw = localStorage.getItem(sumiKey);
+    if (!raw) {
+      console.log("No save file found.");
+      return false;
+    }
+
+    const loaded = JSON.parse(raw);
+
+    // Simple safety check
+    if (typeof loaded !== "object") {
+      console.error("Save file is corrupted.");
+      return false;
+    }
+
+    gameState = loaded; // Replace the current state
+    console.log("Game loaded:", gameState);
+    return true;
+
+  } catch (err) {
+    console.error("Load failed:", err);
+    return false;
+  }
+}
+
+function deleteSave() {
+  localStorage.removeItem(sumiKey);
+  console.log("Save deleted.");
+}
+
+function pauseStatsSetup(){
+document.getElementById("pauseStats").innerText = `
+Name: ${gameState.playersName}
+Level: ${gameState.level}
+Exp: ${gameState.exp}
+Gold: ${gameState.gold}`
+}
+
+function openPause(){
+document.getElementById('pauseMenu').style.display = "flex";
+}
+
+function closePause(){
+document.getElementById('pauseMenu').style.display = "none";
+}
+
+function enterRoom(roomname){
+gameState.currentroom = roomname;
+
+  // hide all rooms
+  document.querySelectorAll(".room").forEach(div => {
+    div.style.display = "none";
+  });
+
+
+let room = document.getElementById(roomname);
+if (room){
+    room.style.display = "block";
+}
+saveGame();
+console.log(`Current Room: ${gameState.currentroom}`)
+}
+
+function loadPlayerBox(){
+  document.getElementById('playerBoxHp').innerText = gameState.hp;
+  document.getElementById('playerBoxMp').innerText = gameState.mp;
+}
+//load the saved room on startup
+enterRoom(gameState.currentroom);
+//if no current room we go to bedroom
+if (!gameState.currentroom){
+  enterRoom('bedroom');
+}
+pauseStatsSetup();
+loadPlayerBox();
 </script>
 </body>
 </html>
