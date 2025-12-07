@@ -11,19 +11,21 @@ body{
     left: 50%;
     transform: translateX(-50%);
     font-size: 30px;
+    background-color: thistle;
+    color: darkslategray;
 }
 #pauseMenu{
 border: solid 1px white;
-background-color: black;
-width: 50%;
-height: 50%;
+background-color: thistle;
+width: 80%;
+height: 80%;
 z-index: 20;
 position: absolute;
 left: 50%;
 top: 15%;
 transform: translateX(-50%);
 font-size: 30px;
-color: white;
+color: darkslategray;
 display: none;
 flex-direction: row;
 }
@@ -41,16 +43,13 @@ flex-direction: row;
     justify-content: center;
     display: flex;
     flex-direction: column;
-    position: relative;
 }
 #playerImg{
-    scale: 50%;
-    margin-top: -30%;
-    margin-bottom: -37%;
+  height: 50%;
 }
 #dataCenter{
     border: solid 1px pink;
-    background-color: darkslategray;
+    background-color: black;
     width: 50%;
     display: flex;
     flex-direction: column;
@@ -58,49 +57,72 @@ flex-direction: row;
     justify-content: center;
 }
 #dataCenter button{
-    background-color: black;
-    color: white;
+    background-color: thistle;
+    color: darkslategray;
     font-size: 30px;
     margin-bottom: 2%;
 }
 
 /*playerBox top left*/
 #playerBox{
+  border: solid 3px white;
+  background-color: thistle;
   position: relative;
-  top: 0%;
   left: 0%;
-  background-color: black;
-  width: 30%;
-  height: 15%;
-  border: solid 1px white;
+  top: 5%;
+  width: 20%;
+  height: 10%;
+  display: flex;
 }
 #playerBoxPic{
-  scale: 25%;
-  margin: -180 -180 -180 -180;
+  background-image: url('marcelo.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: 30%;
+  height: 100%;
 }
-#playerBoxHp{
+#playerBoxHpBox{
+  width: 70%;
   height: 50%;
   position: absolute;
-  right: 0%;
   top: 0%;
-  width: 65%;
+  left: 30%;
+  display: flex;
+  flex-direction: row;
 }
-#playerBoxMp{
+#playerBoxMpBox{
+  width: 70%;
   height: 50%;
   position: absolute;
-  right: 0%;
   top: 50%;
-  width: 65%;
+  left: 30%;
+  display: flex;
+  flex-direction: row;
 }
 #playerBoxHpPic{
-  scale: 20%;
-  margin: -175 -160 -200 -200;
+  width: 30%;
+  background-image: url('heart.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 #playerBoxMpPic{
-  scale: 28%;
-  margin: -137 -150 -170 -160;
+  width: 30%;
+  background-image: url('mp.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
 }
-
+#playerBoxHp{
+  color: darkslategray;
+  align-content: center;
+  font-size: 30px;
+}
+#playerBoxMp{
+  color: darkslategray;
+  align-content: center;
+  font-size: 30px;
+}
 
 
 /*room UI*/
@@ -128,7 +150,7 @@ flex-direction: row;
 }
 /*Navbox UI*/
 #navBox{
-  background-color: black;
+  background-color: thistle;
   padding: 20px;
   align-items: center;
   justify-content: center;
@@ -136,17 +158,16 @@ flex-direction: row;
   flex-direction: column;
   width: fit-content;
   position: absolute;
-  top: 60%;
+  top: 70%;
   left: 50%;
   transform: translateX(-50%);
-  color: white;
+  color: darkslategray;
   font-weight: bold;
   border: solid 1px white;
 }
 #navBox button{
   background-color: white;
-  color: black;
-  font-weight: bolder;
+  color: darkslategray;
   font-size: 30px;
   margin-bottom: 10px;
 }
@@ -167,17 +188,20 @@ flex-direction: row;
 <button onclick="deleteSave()">erase game</button>
 </div>
 </div>
-
+<!--player container top left-->
 <div id="playerBox">
-<img id="playerBoxPic" src="marcelo.png">
+
+<div id="playerBoxPic"></div>
+
 <div id="playerBoxHpBox">
-<img id="playerBoxHpPic" src="heart.png">
+<div id="playerBoxHpPic"></div>
 <span id="playerBoxHp"></span>
 </div>
 <div id="playerBoxMpBox">
-<img id="playerBoxMpPic" src="mp.png">
+<div id="playerBoxMpPic"></div>
 <span id="playerBoxMp"></span>
 </div>
+
 </div>
 
 <!--these will be rooms-->
@@ -290,8 +314,8 @@ console.log(`Current Room: ${gameState.currentroom}`)
 }
 
 function loadPlayerBox(){
-  document.getElementById('playerBoxHp').innerText = gameState.hp;
-  document.getElementById('playerBoxMp').innerText = gameState.mp;
+  document.getElementById('playerBoxHp').innerText = `HP: ${gameState.hp}`;
+  document.getElementById('playerBoxMp').innerText = `MP: ${gameState.mp}`;
 }
 //load the saved room on startup
 enterRoom(gameState.currentroom);
