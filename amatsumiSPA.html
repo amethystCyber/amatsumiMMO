@@ -126,6 +126,43 @@ flex-direction: row;
   font-size: 30px;
 }
 
+/*Chatbox UI*/
+.chatbox{
+border: solid 1px black;
+background-color: white;
+width: 35%;
+height: 20%;
+position: absolute;
+top: 50%;
+left: 50%;
+transform: translateX(-50%);
+display: none;
+flex-direction: row;
+}
+#chatPic{
+width: 30%;
+height: 100%;
+border: solid 1px black;
+}
+#chatTalk{
+width: 70%;
+height: 100%;
+border: solid 1px black;
+}
+
+/*NPCS*/
+#asuka{
+  background-image: url('asuka.png');
+  background-size: contain;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 5;
+  display: flex;
+  width: 10%;
+  height: 10%;
+}
+
 /*Navbox UI*/
 #navBox{
   background-color: thistle;
@@ -151,8 +188,11 @@ flex-direction: row;
 </style>
 </head>
 <body>
-<!--pause menu-->
+<!--Pause Button-->
 <button onclick="openPause()" id="pause">Pause</button>
+
+
+<!--Pause Menu-->
 <div id="pauseMenu">
 <button onclick="closePause()" id="closePause">X</button>
 <div id="playerStats">
@@ -165,7 +205,10 @@ flex-direction: row;
 <button onclick="deleteSave()">erase game</button>
 </div>
 </div>
-<!--player container top left-->
+
+
+
+<!--Player Box Top Left-->
 <div id="playerBox">
 
 <div id="playerBoxPic"></div>
@@ -181,11 +224,24 @@ flex-direction: row;
 
 </div>
 
-<!--room navigation-->
+<div id="asuka"></div>
+
+<!--Chatbox-->
+<div class="chatBox">
+<div id="chatPic"></div>
+<div id="chatTalk"></div>
+</div>
+
+
+
+<!--Navigation Box-->
 <div id="navBox">
 <button onclick="goToRoom('town')">Go to town</button>
 <button onclick="goToRoom('bedroom')">Go to bedroom</button>
 </div>
+
+
+
 
 <script>
 let gameState = {
