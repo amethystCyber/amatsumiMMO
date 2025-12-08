@@ -195,7 +195,7 @@ let gameState = {
     defense: 1,
     mp: 10,
     gold: 0,
-    currentroom: "",
+    currentroom: "bedroom",
     exp: 0,
     level: 0
 }
@@ -225,6 +225,7 @@ function loadGame() {
     const raw = localStorage.getItem(sumiKey);
     if (!raw) {
       console.log("No save file found.");
+      goToRoom("bedroom");
       return false;
     }
 
@@ -237,6 +238,7 @@ function loadGame() {
     }
 
     gameState = loaded; // Replace the current state
+    goToRoom(gameState.currentroom);
     console.log("Game loaded:", gameState);
     return true;
 
@@ -298,12 +300,9 @@ saveGame();
 } 
 
 
-
-
-
-
 pauseStatsSetup();
 loadPlayerBox();
+loadGame();
 </script>
 </body>
 </html>
