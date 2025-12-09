@@ -2,7 +2,7 @@
 <head>
 <style>
 body{
-    background-color: rosybrown;
+    background-color: black;
     background-size: 50%;
     background-position: top center;
     background-repeat: no-repeat;
@@ -10,8 +10,8 @@ body{
 /*pause menu UI*/
 #pause{
     position: absolute;
-    top: 3%;
-    right: 5%;
+    top: 5%;
+    right: 11%;
     font-size: 30px;
     background-color: thistle;
     color: darkslategray;
@@ -70,7 +70,7 @@ flex-direction: row;
   border: solid 3px white;
   background-color: thistle;
   position: relative;
-  left: 0%;
+  left: 3%;
   top: 5%;
   width: 20%;
   height: 10%;
@@ -127,7 +127,7 @@ flex-direction: row;
 }
 
 /*Chatbox UI*/
-.chatbox{
+#chatbox{
 border: solid 1px black;
 background-color: white;
 width: 35%;
@@ -172,7 +172,7 @@ border: solid 1px black;
   width: fit-content;
   position: absolute;
   top: 20%;
-  left: 3%;
+  left: 5.5%;
   color: darkslategray;
   font-weight: bold;
   border: solid 1px white;
@@ -225,7 +225,7 @@ border: solid 1px black;
 <div id="asuka"></div>
 
 <!--Chatbox-->
-<div class="chatBox">
+<div id="chatBox">
 <div id="chatPic"></div>
 <div id="chatTalk"></div>
 </div>
@@ -236,6 +236,12 @@ border: solid 1px black;
 <div id="navBox">
 <button onclick="goToRoom('town')">Go to town</button>
 <button onclick="goToRoom('bedroom')">Go to bedroom</button>
+
+
+
+<!--testing buttons-->
+<button onclick="openChatBox()">open chat box div</button>
+<button onclick="talkToAsuka()">talk to asuka</button>
 </div>
 
 
@@ -352,6 +358,21 @@ function goToRoom(roomname){
 
 saveGame();
 } 
+
+
+
+
+
+function openChatBox(){
+  document.getElementById('chatBox').style.display = "flex";
+}
+
+function talkToAsuka(){
+  openChatBox();
+  
+}
+
+
 
 
 pauseStatsSetup();
