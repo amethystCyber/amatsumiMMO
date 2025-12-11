@@ -2,248 +2,62 @@
 <head>
 <style>
 body{
-    background-color: black;
-    background-size: 50%;
-    background-position: top center;
-    background-repeat: no-repeat;
-}
-/*pause menu UI*/
-#pause{
-    position: absolute;
-    top: 5%;
-    right: 11%;
-    font-size: 30px;
-    background-color: thistle;
-    color: darkslategray;
-}
-#pauseMenu{
-border: solid 1px white;
-background-color: thistle;
-width: 80%;
-height: 80%;
-z-index: 20;
-position: absolute;
-left: 50%;
-top: 15%;
-transform: translateX(-50%);
-font-size: 30px;
-color: darkslategray;
-display: none;
-flex-direction: row;
-}
-#closePause{
-    position: absolute;
-    right: 0%;
-    top: 0%;
-    background-color: black;
-    color: white;
-    font-size: 30px;
-}
-#playerStats{
-    width: 50%;
-    align-items: center;
-    justify-content: center;
-    display: flex;
-    flex-direction: column;
-}
-#playerImg{
-  height: 50%;
-}
-#dataCenter{
-    border: solid 1px pink;
-    background-color: black;
-    width: 50%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-#dataCenter button{
-    background-color: thistle;
-    color: darkslategray;
-    font-size: 30px;
-    margin-bottom: 2%;
+  background-color: black;
 }
 
-/*playerBox top left*/
-#playerBox{
-  border: solid 3px white;
-  background-color: thistle;
-  position: relative;
-  left: 3%;
-  top: 5%;
-  width: 20%;
+#statusBar{
+  width: 100%;
   height: 10%;
-  display: flex;
-}
-#playerBoxPic{
-  background-image: url('marcelo.png');
-  background-size: contain;
-  background-repeat: no-repeat;
-  width: 30%;
-  height: 100%;
-}
-#playerBoxHpBox{
-  width: 70%;
-  height: 50%;
+  border: solid 3px black;
   position: absolute;
-  top: 0%;
-  left: 30%;
-  display: flex;
-  flex-direction: row;
-}
-#playerBoxMpBox{
-  width: 70%;
-  height: 50%;
-  position: absolute;
-  top: 50%;
-  left: 30%;
-  display: flex;
-  flex-direction: row;
-}
-#playerBoxHpPic{
-  width: 30%;
-  background-image: url('heart.png');
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
-}
-#playerBoxMpPic{
-  width: 30%;
-  background-image: url('mp.png');
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
-}
-#playerBoxHp{
-  color: darkslategray;
-  align-content: center;
-  font-size: 30px;
-}
-#playerBoxMp{
-  color: darkslategray;
-  align-content: center;
-  font-size: 30px;
-}
-
-/*Chatbox UI*/
-#chatbox{
-border: solid 1px black;
-background-color: white;
-width: 35%;
-height: 20%;
-position: absolute;
-top: 50%;
-left: 50%;
-transform: translateX(-50%);
-display: none;
-flex-direction: row;
-}
-#chatPic{
-width: 30%;
-height: 100%;
-border: solid 1px black;
-}
-#chatTalk{
-width: 70%;
-height: 100%;
-border: solid 1px black;
-}
-
-/*NPCS*/
-#asuka{
-  background-image: url('asuka3.png');
-  background-size: contain;
-  position: absolute;
-  top: 50%;
+  top: 2%;
   left: 50%;
-  z-index: 5;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: row;
+  background-color: grey;
+}
+
+#background{
+  width: 80%;
+  height: 40%;
+  border: solid 3px black;
+  position: absolute;
+  top: 16%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: grey;
+}
+
+#playerPhoto{
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
   width: 20%;
 }
 
-/*Navbox UI*/
-#navBox{
-  background-color: thistle;
-  padding: 20px;
-  align-items: center;
+.status{
+  border: solid 1px black;
   justify-content: center;
+  align-items: center;
   display: flex;
-  flex-direction: column;
-  width: fit-content;
-  position: absolute;
-  top: 20%;
-  left: 5.5%;
-  color: darkslategray;
-  font-weight: bold;
-  border: solid 1px white;
-}
-#navBox button{
-  background-color: white;
-  color: darkslategray;
-  font-size: 30px;
-  margin-bottom: 10px;
+  padding: 10px;
 }
 </style>
 </head>
 <body>
-<!--Pause Button-->
-<button onclick="openPause()" id="pause">Pause</button>
+<div id="statusBar">
 
-
-<!--Pause Menu-->
-<div id="pauseMenu">
-<button onclick="closePause()" id="closePause">X</button>
-<div id="playerStats">
-<img id="playerImg" src="bodyCelo.png">
-<span id="pauseStats"></span>
-</div>
-<div id="dataCenter">
-<button onclick="saveGame()">save game</button>
-<button onclick="loadGame()">load game</button>
-<button onclick="deleteSave()">erase game</button>
-</div>
-</div>
-
-
-
-<!--Player Box Top Left-->
-<div id="playerBox">
-
-<div id="playerBoxPic"></div>
-
-<div id="playerBoxHpBox">
-<div id="playerBoxHpPic"></div>
-<span id="playerBoxHp"></span>
-</div>
-<div id="playerBoxMpBox">
-<div id="playerBoxMpPic"></div>
-<span id="playerBoxMp"></span>
-</div>
+<div class="status" id="playerPhoto"></div>
+<div class="status" id="playerName"></div>
+<div class="status" id="playerLevel"></div>
+<div class="status" id="playerHealth"></div>
+<div class="status" id="playerMagic"></div>
+<div class="status" id="playerExp"></div>
+<div class="status" id="playerYen"></div>
 
 </div>
-
-<div id="asuka"></div>
-
-<!--Chatbox-->
-<div id="chatBox">
-<div id="chatPic"></div>
-<div id="chatTalk"></div>
-</div>
-
-
-
-<!--Navigation Box-->
-<div id="navBox">
-<button onclick="goToRoom('town')">Go to town</button>
-<button onclick="goToRoom('bedroom')">Go to bedroom</button>
-
-
-
-<!--testing buttons-->
-<button onclick="openChatBox()">open chat box div</button>
-<button onclick="talkToAsuka()">talk to asuka</button>
-</div>
-
+<div id="background">background</div>
 
 
 
@@ -254,18 +68,10 @@ let gameState = {
     attack: 5,
     defense: 1,
     mp: 10,
-    gold: 0,
+    yen: 0,
     currentroom: "bedroom",
     exp: 0,
-    level: 0
-}
-
-let rat = {
-    name: "Angry Rat",
-    hp: 40,
-    exp: 8,
-    gold: 6,
-    url: "rat.jpg"
+    level: 1
 }
 
 const sumiKey = "AmatsumiV1Save";
@@ -313,71 +119,19 @@ function deleteSave() {
   console.log("Save deleted.");
 }
 
-function pauseStatsSetup(){
-document.getElementById("pauseStats").innerText = `
-Name: ${gameState.playersName}
-Level: ${gameState.level}
-Exp: ${gameState.exp}
-Gold: ${gameState.gold}`
+function fillStatusBar(){
+  document.getElementById('playerPhoto').style.backgroundImage = "url('marcelo.png')";
+  document.getElementById('playerName').innerText = `Name: ${gameState.playersName}`;
+  document.getElementById('playerLevel').innerText = `Level: ${gameState.level}`;
+  document.getElementById('playerHealth').innerText = `HP: ${gameState.hp}`;
+  document.getElementById('playerMagic').innerText = `MP: ${gameState.mp}`;
+  document.getElementById('playerExp').innerText = `Exp: ${gameState.exp}`;
+  document.getElementById('playerYen').innerText = `Yen: ${gameState.yen}`;
+
+  console.log(`status bar has been filled with player stats`);
 }
 
-function openPause(){
-document.getElementById('pauseMenu').style.display = "flex";
-}
-
-function closePause(){
-document.getElementById('pauseMenu').style.display = "none";
-}
-
-function loadPlayerBox(){
-  document.getElementById('playerBoxHp').innerText = `HP: ${gameState.hp}`;
-  document.getElementById('playerBoxMp').innerText = `MP: ${gameState.mp}`;
-}
-
-
-function goToRoom(roomname){
-  //first we clear the previous room
-  document.body.style.backgroundImage = "none";
-
-  //set the current room in game state
-  gameState.currentroom = roomname;
-
-  //log whats going on
-  console.log('goToRoom function activated');
-  console.log('requested room:');
-  console.log(gameState.currentroom);
-  
-  //if im going to town then the background becomes town
-  if (gameState.currentroom === "town"){
-  document.body.style.backgroundImage = "url('day1.jpg')";
-}
-
-  if (gameState.currentroom === "bedroom"){
-  document.body.style.backgroundImage = "url('bedroom.jpg')";
-}
-
-saveGame();
-} 
-
-
-
-
-
-function openChatBox(){
-  document.getElementById('chatBox').style.display = "flex";
-}
-
-function talkToAsuka(){
-  openChatBox();
-  
-}
-
-
-
-
-pauseStatsSetup();
-loadPlayerBox();
-loadGame();
+fillStatusBar();
 </script>
 </body>
 </html>
