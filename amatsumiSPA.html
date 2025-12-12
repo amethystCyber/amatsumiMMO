@@ -16,32 +16,35 @@ body{
   display: flex;
   flex-direction: row;
   background-color: grey;
+  justify-content: space-evenly;
 }
 
 #background{
   width: 80%;
-  height: 40%;
-  border: solid 3px black;
+  height: 37%;
+  border: solid 2px white;
   position: absolute;
   top: 16%;
   left: 50%;
   transform: translateX(-50%);
-  background-color: grey;
 }
 
 #playerPhoto{
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
-  width: 20%;
+  width: 25%;
+}
+
+#playerName{
+  font-style: oblique;
 }
 
 .status{
-  border: solid 1px black;
-  justify-content: center;
   align-items: center;
+  padding: 5px;
   display: flex;
-  padding: 10px;
+  font-size: 30px;
 }
 </style>
 </head>
@@ -57,7 +60,7 @@ body{
 <div class="status" id="playerYen"></div>
 
 </div>
-<div id="background">background</div>
+<div id="background"></div>
 
 
 
@@ -72,6 +75,18 @@ let gameState = {
     currentroom: "bedroom",
     exp: 0,
     level: 1
+}
+
+let currentRoom = null;
+
+let town = {
+  name: "Amatsumi City",
+  url: "url('day2.jpg')"
+}
+
+let apartment= {
+  name: "Marcelo's Apartment",
+  url: "url('bedroom2.jpg')"
 }
 
 const sumiKey = "AmatsumiV1Save";
@@ -121,7 +136,7 @@ function deleteSave() {
 
 function fillStatusBar(){
   document.getElementById('playerPhoto').style.backgroundImage = "url('marcelo.png')";
-  document.getElementById('playerName').innerText = `Name: ${gameState.playersName}`;
+  document.getElementById('playerName').innerText = `${gameState.playersName}`;
   document.getElementById('playerLevel').innerText = `Level: ${gameState.level}`;
   document.getElementById('playerHealth').innerText = `HP: ${gameState.hp}`;
   document.getElementById('playerMagic').innerText = `MP: ${gameState.mp}`;
@@ -131,6 +146,25 @@ function fillStatusBar(){
   console.log(`status bar has been filled with player stats`);
 }
 
+function goToRoom(room){
+
+  //first we assign the currentRoom variable to match whatever room object we plug in
+
+  currentRoom = room.name;
+
+  //with the room object we plug in we grab the url param and set the background
+
+  document.getElementById('background').style.background = room.url;
+  document.getElementById('background').style.backgroundRepeat = 'no-repeat';
+  document.getElementById('background').style.backgroundPosition = 'center';
+  document.getElementById('background').style.backgroundSize = 'cover';
+
+  //then we log the players current room into the console
+
+  console.log(`Player has moved to ${currentRoom}`);
+}
+
+goToRoom(apartment);
 fillStatusBar();
 </script>
 </body>
