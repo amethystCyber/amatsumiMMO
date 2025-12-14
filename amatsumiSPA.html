@@ -4,39 +4,32 @@
 body{
   background-color: black;
 }
-/*STATUS BAR UI*/
-#statusBar{
-  width: 100%;
-  height: 10%;
-  border: solid 3px black;
+
+/*MINI STATUS BAR*/
+#miniStatusbar{
   position: absolute;
-  top: 2%;
+  top: 5%;
+  z-index: 2;
   left: 50%;
   transform: translateX(-50%);
+  height: 3%;
+  width: 80%;
   display: flex;
-  flex-direction: row;
-  background-color: grey;
-  justify-content: space-evenly;
-}
-.status{
   align-items: center;
-  padding: 5px;
-  display: flex;
-  font-size: 30px;
+  justify-content: center;
 }
-#playerPhoto{
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
-  width: 25%;
+.mini{
+  flex: 1;
+  color: white;
+  font-size: 40px;
 }
-#playerName{
-  font-style: oblique;
+#time{
+  text-align: left;
 }
-/*STATUS BAR UI*/
-
-
-
+#location{
+  text-align: right;
+}
+/*MINI STATUS BAR*/
 
 
 /*BACKGROUND UI*/
@@ -45,35 +38,30 @@ body{
   height: 37%;
   border: solid 2px white;
   position: absolute;
-  top: 16%;
+  top: 8%;
   left: 50%;
   transform: translateX(-50%);
+  display: flex;
+}
+.backgroundSides{
+  flex: 1;
+  position: static;
+  z-index: 1;
 }
 /*BACKGROUND UI*/
-
-
-
 </style>
 </head>
 <body>
-<div id="location"></div>
-
-<div id="time"></div>
-
-
-<div id="statusBar">
-
-<div class="status" id="playerPhoto"></div>
-<div class="status" id="playerName"></div>
-<div class="status" id="playerLevel"></div>
-<div class="status" id="playerHealth"></div>
-<div class="status" id="playerMagic"></div>
-<div class="status" id="playerExp"></div>
-<div class="status" id="playerYen"></div>
-
+<div id="miniStatusbar">
+  <div class="mini" id="time"></div>
+  <div class="mini" id="location"></div>
 </div>
 
-<div id="background"></div>
+
+<div id="background">
+<div class="backgroundSides" id="backgroundLeft"></div>
+<div class="backgroundSides" id="backgroundRight"></div>
+</div>
 
 
 
@@ -83,18 +71,12 @@ let gameState = {
     hp: 100,
     attack: 5,
     defense: 1,
-    mp: 10,
     yen: 0,
-    currentroom: "bedroom",
+    currentroom: "",
+    location: "",
     exp: 0,
     level: 1
 }
-
-let currentRoom = null;
-
-let time = null;
-
-let playerLocation = null;
 
 let town = {
   name: "Amatsumi City",
@@ -103,7 +85,15 @@ let town = {
 
 let apartment = {
   name: "Marcelo's Apartment",
-  morningUrl: "url('apartmentPics/morningApartment.jpg')"
+  morningUrl: "url('apartmentPics/morningApartment.jpg')",
+  noonUrl: "url('apartmentPics/afternoonApartment.jpg')",
+  eveningUrl: "url('apartmentPics/eveningApartment.jpg')",
+  nightUrl: "url('apartmentPics/nightApartment.jpg')"
+}
+
+let marcelo = {
+  name: "Marcelo",
+  bodyUrl: "url('playerPics/bodyCelo.png')"
 }
 
 const sumiKey = "AmatsumiV1Save";
@@ -151,44 +141,78 @@ function deleteSave() {
   console.log("Save deleted.");
 }
 
-function fillStatusBar(){
-  document.getElementById('playerPhoto').style.backgroundImage = "url('playerPics/marcelo.png')";
-  document.getElementById('playerName').innerText = `${gameState.playersName}`;
-  document.getElementById('playerLevel').innerText = `Level: ${gameState.level}`;
-  document.getElementById('playerHealth').innerText = `HP: ${gameState.hp}`;
-  document.getElementById('playerMagic').innerText = `MP: ${gameState.mp}`;
-  document.getElementById('playerExp').innerText = `Exp: ${gameState.exp}`;
-  document.getElementById('playerYen').innerText = `Yen: ${gameState.yen}`;
-
-  console.log(`status bar has been filled with player stats`);
-}
 
 function goToRoom(room){
 
   //first we assign the currentRoom variable to match whatever room object we plug in
 
-  currentRoom = room.name;
+  gameState.currentroom = room.name;
 
   //with the room object we plug in we grab the url param and set the background
-
+  if(timeIndex === 0){
   document.getElementById('background').style.background = room.morningUrl;
+  }
+  if(timeIndex === 1){
+    document.getElementById('background').style.background = room.noonUrl;
+  }
+    if(timeIndex === 2){
+    document.getElementById('background').style.background = room.eveningUrl;
+  }
+if(timeIndex === 3){
+    document.getElementById('background').style.background = room.nightUrl;
+  }
+
+
+
   document.getElementById('background').style.backgroundRepeat = 'no-repeat';
   document.getElementById('background').style.backgroundPosition = 'center';
   document.getElementById('background').style.backgroundSize = 'cover';
 
-  //then we log the players current room into the console
-
-  console.log(`Player has moved to ${currentRoom}`);
-
   //then we update the location div to show the players current room
 
-  playerLocation = currentRoom;
+  gameState.location = gameState.currentroom;
+
+  document.getElementById('location').innerText = gameState.location;
+
+  console.log(`The players current location is ${gameState.location}`);
 }
 
+function showPersonLeftside(person){
+  if(person){
+  //first we log the npc we plug into this function to the console
+  console.log(`You have plugged in ${person.name} into leftside background`)
 
+  //then we set the leftsidebackground to the npc objects body url with settings
+  document.getElementById('backgroundLeft').style.backgroundImage = person.bodyUrl;
+  document.getElementById('backgroundLeft').style.backgroundRepeat = "no-repeat";
+  document.getElementById('backgroundLeft').style.backgroundPosition = "bottom center";
+  }
 
+    else{
+    console.log('no npc object provided');
+
+      document.getElementById('backgroundLeft').style.backgroundImage = "";
+  }
+}
+
+let timeIndex = 3;
+
+let currentTime = ["Morning", "Noon", "Evening", "Night"];
+
+function advanceTime(){
+    timeIndex++;
+    displayTime();
+}
+
+function displayTime(){
+    document.getElementById('time').innerText = currentTime[timeIndex];
+    console.log(`The current time is ${currentTime[timeIndex]}`);
+}
+
+console.log(`the current time index is ${timeIndex}`);
+displayTime();
+showPersonLeftside(marcelo);
 goToRoom(apartment);
-fillStatusBar();
 </script>
 </body>
 </html>

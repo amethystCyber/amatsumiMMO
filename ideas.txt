@@ -16,3 +16,27 @@ hey kid come here, triggers a fight with a hobo
 
 each action we take advances time from morning to afternoon to evening to night
 
+12-14-25
+
+i need to create a let variable named time.
+
+ex.
+
+0 morning,
+1 noon,
+2 evening,
+3 night
+
+let timeIndex = 0;
+
+let currentTime = ["morning", "noon", "afternoon", "night"];
+
+function advanceTime(){
+    timeIndex++;
+    displayTime();
+}
+
+function displayTime(){
+    document.getElementById('time').innerText = currentTime[timeIndex];
+}
+
