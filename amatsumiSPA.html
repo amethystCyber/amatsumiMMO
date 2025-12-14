@@ -63,7 +63,7 @@ body{
 <div class="backgroundSides" id="backgroundRight"></div>
 </div>
 
-
+<button onclick="advanceTime()">advance time</button>
 
 <script>
 let gameState = {
@@ -75,6 +75,8 @@ let gameState = {
     currentroom: "",
     location: "",
     exp: 0,
+    currentTime: ["Morning", "Noon", "Evening", "Night"],
+    timeIndex: 0,
     level: 1
 }
 
@@ -149,16 +151,16 @@ function goToRoom(room){
   gameState.currentroom = room.name;
 
   //with the room object we plug in we grab the url param and set the background
-  if(timeIndex === 0){
+  if(gameState.timeIndex === 0){
   document.getElementById('background').style.background = room.morningUrl;
   }
-  if(timeIndex === 1){
+  if(gameState.timeIndex === 1){
     document.getElementById('background').style.background = room.noonUrl;
   }
-    if(timeIndex === 2){
+    if(gameState.timeIndex === 2){
     document.getElementById('background').style.background = room.eveningUrl;
   }
-if(timeIndex === 3){
+if(gameState.timeIndex === 3){
     document.getElementById('background').style.background = room.nightUrl;
   }
 
@@ -195,21 +197,24 @@ function showPersonLeftside(person){
   }
 }
 
-let timeIndex = 3;
 
-let currentTime = ["Morning", "Noon", "Evening", "Night"];
 
 function advanceTime(){
-    timeIndex++;
+    gameState.timeIndex++;
     displayTime();
+
+    if(gameState.timeIndex >= 4){
+      gameState.timeIndex = 0;
+      displayTime();
+    }
 }
 
 function displayTime(){
-    document.getElementById('time').innerText = currentTime[timeIndex];
-    console.log(`The current time is ${currentTime[timeIndex]}`);
+    document.getElementById('time').innerText = gameState.currentTime[gameState.timeIndex];
+    console.log(`The current time is ${gameState.currentTime[gameState.timeIndex]}`);
 }
 
-console.log(`the current time index is ${timeIndex}`);
+console.log(`the current time index is ${gameState.timeIndex}`);
 displayTime();
 showPersonLeftside(marcelo);
 goToRoom(apartment);
