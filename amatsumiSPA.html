@@ -49,6 +49,18 @@ body{
   z-index: 1;
 }
 /*BACKGROUND UI*/
+
+#actions{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 50%;
+  height: 25%;
+  border: solid 1px white;
+
+}
+
 </style>
 </head>
 <body>
@@ -63,7 +75,13 @@ body{
 <div class="backgroundSides" id="backgroundRight"></div>
 </div>
 
-<button onclick="advanceTime()">advance time</button>
+<div id="actions">
+  <button onclick="advanceTime(); goToRoom(apartment);">go to apartment</button>
+  <button onclick="advanceTime(); goToRoom(town);">go to town</button>
+</div>
+
+
+
 
 <script>
 let gameState = {
@@ -82,7 +100,10 @@ let gameState = {
 
 let town = {
   name: "Amatsumi City",
-  url: "url('day2.jpg')"
+  morningUrl: "url('townPics/morningTownn.jpg')",
+  noonUrl: "url('townPics/noonTown.jpg')",
+  eveningUrl: "url('townPics/eveningTown.jpg')",
+  nightUrl: "url('townPics/nightTown.jpg')"
 }
 
 let apartment = {
@@ -164,7 +185,7 @@ if(gameState.timeIndex === 3){
     document.getElementById('background').style.background = room.nightUrl;
   }
 
-
+  //these are settings to adjust the background image
 
   document.getElementById('background').style.backgroundRepeat = 'no-repeat';
   document.getElementById('background').style.backgroundPosition = 'center';
@@ -217,7 +238,7 @@ function displayTime(){
 console.log(`the current time index is ${gameState.timeIndex}`);
 displayTime();
 showPersonLeftside(marcelo);
-goToRoom(apartment);
+goToRoom(town);
 </script>
 </body>
 </html>
