@@ -55,10 +55,38 @@ body{
   top: 50%;
   left: 50%;
   transform: translateX(-50%);
-  width: 50%;
+  width: 70%;
   height: 25%;
-  border: solid 1px white;
-
+  border: solid 3px white;  
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  color: white;
+  padding: 10px;
+  font-size: 40px;
+  gap: 20px;
+}
+#actions button{
+  background-color: black;
+  color: white;
+  font-size: 30px;
+  margin-bottom: 4%;
+  width: fit-content;
+  padding: 10px;
+}
+#navigation{
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
+}
+#choices{
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
 }
 
 </style>
@@ -76,8 +104,17 @@ body{
 </div>
 
 <div id="actions">
-  <button onclick="advanceTime(); goToRoom(apartment);">go to apartment</button>
-  <button onclick="advanceTime(); goToRoom(town);">go to town</button>
+<div id="navigation">
+  <p>Navigation</p>
+  <button onclick="advanceTime(); goToRoom(apartment);">Apartment</button>
+  <button onclick="advanceTime(); goToRoom(town);">Town</button>
+</div>
+
+<div id="choices">
+<p>Actions</p>
+<button>Phone</button>
+</div>
+
 </div>
 
 
@@ -209,6 +246,7 @@ function showPersonLeftside(person){
   document.getElementById('backgroundLeft').style.backgroundImage = person.bodyUrl;
   document.getElementById('backgroundLeft').style.backgroundRepeat = "no-repeat";
   document.getElementById('backgroundLeft').style.backgroundPosition = "bottom center";
+  document.getElementById('backgroundLeft').style.backgroundSize = "90%";
   }
 
     else{
