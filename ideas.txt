@@ -1,4 +1,1 @@
-make a div box named actions, updates actions with an if statement and rooms
-ex. if currentroom = bedroom then we display take a nap, watch tv, do some studying
-
-right now working on background auto changing based on the background
+Whats 
