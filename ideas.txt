@@ -1,1 +1,15 @@
-Whats 
+Create a chatbox (with a next button)
+
+Create background music
+
+Create npc dialogue sounds
+
+Create battle music and battle screen
+
+create a phone with sounds and apps
+
+apps: 
+bank 
+stocks
+email
+messages

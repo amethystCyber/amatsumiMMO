@@ -36,7 +36,6 @@ body{
 #background{
   width: 80%;
   height: 37%;
-  border: solid 2px white;
   position: absolute;
   top: 8%;
   left: 50%;
@@ -50,43 +49,33 @@ body{
 }
 /*BACKGROUND UI*/
 
-#actions{
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translateX(-50%);
-  width: fit-content;
-  height: fit-content;
-  border: solid 3px white;  
+#startScreen{
+  margin-top: -100px;
+  background-image: url('startScreenBackground.jpg');
+  background-size: 120%;
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 100%;
+  height: 100%;
+  z-index: 20;
+  position: static;
   display: flex;
+  flex-direction: column;
+  color: white;
   justify-content: center;
-  flex-direction: row;
-  color: white;
-  padding: 10px;
+  align-items: center;
   font-size: 40px;
-  gap: 20px;
 }
-#actions button{
-  background-color: black;
-  color: white;
+#startScreen button{
   font-size: 30px;
-  margin-bottom: 4%;
-  width: fit-content;
-  padding: 10px;
+  background-color: white;
+  border-radius: 20px;
+  margin-bottom: 20px;
+  padding: 20px;
 }
-#navigation{
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  text-align: center;
-  align-items: center;
-}
-#choices{
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  text-align: center;
-  align-items: center;
+#startScreen button:hover{
+  background-color: darkcyan;
+  cursor: pointer;
 }
 
 </style>
@@ -103,27 +92,18 @@ body{
 <div class="backgroundSides" id="backgroundRight"></div>
 </div>
 
-<div id="phone">
-  <div class="app" id="messages"></div>
+
+
+
+
+<div onclick="startGame()" id="startScreen">
+<h1>Amatsumi</h1>
+<button>new game</button>
+<button>load game</button>
+<button>erase game</button>
+
+<p>Developed by Marcelo Cisneros</p>
 </div>
-
-<div id="actions">
-<div id="navigation">
-  <p>Navigation</p>
-  <button onclick="advanceTime(); goToRoom(apartment);">Apartment</button>
-  <button onclick="advanceTime(); goToRoom(town);">Town</button>
-</div>
-
-<div id="choices">
-<p>Actions</p>
-<button>Phone</button>
-</div>
-
-</div>
-
-
-
-<div onclick="startGame()" id="startGame"></div>
 <script>
 let gameState = {
     playersName: "Marcelo",
@@ -138,17 +118,6 @@ let gameState = {
     timeIndex: 0,
     level: 1
 }
-
-function startGame(){
-  loadGame();
-  backgroundMusic.loop = true;
-  backgroundMusic.volume = 0.2;
-  backgroundMusic.play();
-}
-const backgroundMusic = new Audio('audio/backgroundMusic.mp3');
-backgroundMusic.loop = true;
-backgroundMusic.volume = 0.2;
-backgroundMusic.play();
 
 let town = {
   name: "Amatsumi City",
@@ -265,7 +234,7 @@ function showPersonLeftside(person){
   }
 
     else{
-    console.log('no npc object provided');
+    console.log('showPersonLeftside(): no npc object provided');
 
       document.getElementById('backgroundLeft').style.backgroundImage = "";
   }
@@ -285,13 +254,31 @@ function advanceTime(){
 
 function displayTime(){
     document.getElementById('time').innerText = gameState.currentTime[gameState.timeIndex];
-    console.log(`The current time is ${gameState.currentTime[gameState.timeIndex]}`);
+    console.log(`displayTime(): The current time is ${gameState.currentTime[gameState.timeIndex]}`);
 }
 
-console.log(`the current time index is ${gameState.timeIndex}`);
+let newGame = true;  //this switch will control the game start function
+
+
+//this function will start the game and load the UI
+function startGame(newGame){
+if(newGame){
+console.log(`Amatsumi has started successfully`);
+// we remove the start screen
+document.getElementById('startScreen').style.display = "none";
+// then we start displaying the UI
 displayTime();
-showPersonLeftside(marcelo);
+// not sure if i need this here
+showPersonLeftside();
 goToRoom(town);
+} else{
+  console.log(`Game has not been started`);
+}
+}
+
+
+startGame();  //insert the new game object
+
 </script>
 </body>
 </html>
