@@ -49,6 +49,7 @@ body{
 }
 /*BACKGROUND UI*/
 
+/*STARTSCREEN UI*/
 #startScreen{
   margin-top: -100px;
   background-image: url('startScreenBackground.jpg');
@@ -77,6 +78,7 @@ body{
   background-color: darkcyan;
   cursor: pointer;
 }
+/*STARTSCREEN UI*/
 
 </style>
 </head>
@@ -94,7 +96,12 @@ body{
 
 
 
-
+<div id="toolBar">
+<button>location</button>
+<button>actions</button>
+<button>phone</button>
+<button>stats</button>
+</div>
 
 <div onclick="startGame()" id="startScreen">
 <h1>Amatsumi</h1>
@@ -191,18 +198,23 @@ function goToRoom(room){
   //first we assign the currentRoom variable to match whatever room object we plug in
 
   gameState.currentroom = room.name;
+  console.log(`goToRoom(): going to ${room.name}`);
 
   //with the room object we plug in we grab the url param and set the background
   if(gameState.timeIndex === 0){
+  console.log(`goToRoom(): time index is 0, setting morning background`);
   document.getElementById('background').style.background = room.morningUrl;
   }
   if(gameState.timeIndex === 1){
+    console.log(`goToRoom(): time index is 1, setting noon background`);
     document.getElementById('background').style.background = room.noonUrl;
   }
     if(gameState.timeIndex === 2){
+    console.log(`goToRoom(): time index is 2, setting evening background`);
     document.getElementById('background').style.background = room.eveningUrl;
   }
 if(gameState.timeIndex === 3){
+    console.log(`goToRoom(): time index is 3, setting night background`);
     document.getElementById('background').style.background = room.nightUrl;
   }
 
@@ -213,12 +225,8 @@ if(gameState.timeIndex === 3){
   document.getElementById('background').style.backgroundSize = 'cover';
 
   //then we update the location div to show the players current room
+  updateLocation();
 
-  gameState.location = gameState.currentroom;
-
-  document.getElementById('location').innerText = gameState.location;
-
-  console.log(`The players current location is ${gameState.location}`);
 }
 
 function showPersonLeftside(person){
@@ -240,7 +248,13 @@ function showPersonLeftside(person){
   }
 }
 
+function updateLocation(){
+  gameState.location = gameState.currentroom;
 
+  document.getElementById('location').innerText = gameState.location;
+
+  console.log(`updateLocation():The players current location is ${gameState.location}`);
+}
 
 function advanceTime(){
     gameState.timeIndex++;
@@ -277,7 +291,7 @@ goToRoom(town);
 }
 
 
-startGame();  //insert the new game object
+startGame(newGame);  //insert the new game object
 
 </script>
 </body>
