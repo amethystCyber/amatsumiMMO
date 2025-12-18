@@ -1,9 +1,13 @@
 <html>
 <head>
 <style>
+
+
 body{
   background-color: black;
 }
+
+
 
 /*MINI STATUS BAR*/
 #miniStatusbar{
@@ -32,6 +36,8 @@ body{
 /*MINI STATUS BAR*/
 
 
+
+
 /*BACKGROUND UI*/
 #background{
   width: 80%;
@@ -48,6 +54,10 @@ body{
   z-index: 1;
 }
 /*BACKGROUND UI*/
+
+
+
+
 
 /*STARTSCREEN UI*/
 #startScreen{
@@ -80,6 +90,57 @@ body{
 }
 /*STARTSCREEN UI*/
 
+
+
+/*TOOLBAR UI*/
+#toolBar{
+  position: absolute;
+  bottom: 20%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80%;
+  display: none;
+  flex-direction: row;
+  justify-content: center;
+  height: fit-content;
+  gap: 10px;
+}
+#toolBar button{
+  width: 20%;
+  height: 100px;
+  font-size: 30px;
+  font-weight: bolder;
+}
+/*TOOLBAR UI*/
+
+
+
+/*OPTIONS UI*/
+
+#options{
+  position: absolute;
+  bottom: 26%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: solid 3px white;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr;
+  width: 80%;
+  min-height: 28%;
+}
+/*OPTIONS UI*/
+
+
+/*OPTION BUTTONS*/
+.options{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 30px;
+}
+/*OPTION BUTTONS*/
+
 </style>
 </head>
 <body>
@@ -94,7 +155,11 @@ body{
 <div class="backgroundSides" id="backgroundRight"></div>
 </div>
 
-
+<div id="options">
+<button class="options" id="storeButton" onclick="goToRoom(cornerStore)">Go to the store</button>
+<button class="options" id="apartmentButton" onclick="goToRoom(apartment)">Go to apartment</button>
+<button class="options" id="townButton" onclick="goToRoom(town)">Go to town</button>
+</div>
 
 <div id="toolBar">
 <button>location</button>
@@ -134,6 +199,14 @@ let town = {
   nightUrl: "url('townPics/nightTown.jpg')"
 }
 
+let cornerStore = {
+  name: "Corner Store",
+  morningUrl: "url('cornerStore.jpg')",
+  noonUrl: "url('cornerStore.jpg')",
+  eveningUrl: "url('cornerStore.jpg')",
+  nightUrl: "url('cornerStore.jpg')"
+}
+
 let apartment = {
   name: "Marcelo's Apartment",
   morningUrl: "url('apartmentPics/morningApartment.jpg')",
@@ -146,6 +219,8 @@ let marcelo = {
   name: "Marcelo",
   bodyUrl: "url('playerPics/bodyCelo.png')"
 }
+
+let 
 
 const sumiKey = "AmatsumiV1Save";
 
@@ -198,23 +273,23 @@ function goToRoom(room){
   //first we assign the currentRoom variable to match whatever room object we plug in
 
   gameState.currentroom = room.name;
-  console.log(`goToRoom(): going to ${room.name}`);
+  console.log(`goToRoom():loading..... ${room.name}`);
 
   //with the room object we plug in we grab the url param and set the background
   if(gameState.timeIndex === 0){
-  console.log(`goToRoom(): time index is 0, setting morning background`);
+  console.log(`goToRoom():Setting morning background`);
   document.getElementById('background').style.background = room.morningUrl;
   }
   if(gameState.timeIndex === 1){
-    console.log(`goToRoom(): time index is 1, setting noon background`);
+    console.log(`goToRoom():Time index is 1, setting noon background`);
     document.getElementById('background').style.background = room.noonUrl;
   }
     if(gameState.timeIndex === 2){
-    console.log(`goToRoom(): time index is 2, setting evening background`);
+    console.log(`goToRoom():Time index is 2, setting evening background`);
     document.getElementById('background').style.background = room.eveningUrl;
   }
 if(gameState.timeIndex === 3){
-    console.log(`goToRoom(): time index is 3, setting night background`);
+    console.log(`goToRoom():Time index is 3, setting night background`);
     document.getElementById('background').style.background = room.nightUrl;
   }
 
@@ -227,6 +302,22 @@ if(gameState.timeIndex === 3){
   //then we update the location div to show the players current room
   updateLocation();
 
+  if(gameState.currentroom === "Amatsumi City"){
+    document.getElementById('townButton').style.display = "none";
+    document.getElementById('storeButton').style.display = "flex";
+    document.getElementById('apartmentButton').style.display = "flex";
+
+  }
+  if(gameState.currentroom === "Marcelo's Apartment"){
+    document.getElementById('townButton').style.display = "flex";
+    document.getElementById('storeButton').style.display = "none";
+    document.getElementById('apartmentButton').style.display = "none";
+  }
+  if(gameState.currentroom === "Corner Store"){
+    document.getElementById('storeButton').style.display = "none";
+    document.getElementById('apartmentButton').style.display = "none";
+    showPersonLeftside();
+  }
 }
 
 function showPersonLeftside(person){
@@ -253,7 +344,7 @@ function updateLocation(){
 
   document.getElementById('location').innerText = gameState.location;
 
-  console.log(`updateLocation():The players current location is ${gameState.location}`);
+  console.log(`updateLocation():Location element has been updated`);
 }
 
 function advanceTime(){
@@ -267,8 +358,8 @@ function advanceTime(){
 }
 
 function displayTime(){
+    console.log(`displayTime():Time element has been updated`);
     document.getElementById('time').innerText = gameState.currentTime[gameState.timeIndex];
-    console.log(`displayTime(): The current time is ${gameState.currentTime[gameState.timeIndex]}`);
 }
 
 let newGame = true;  //this switch will control the game start function
@@ -277,14 +368,14 @@ let newGame = true;  //this switch will control the game start function
 //this function will start the game and load the UI
 function startGame(newGame){
 if(newGame){
-console.log(`Amatsumi has started successfully`);
+console.log(`Amatsumiv1.0 has launched successfully`);
 // we remove the start screen
 document.getElementById('startScreen').style.display = "none";
 // then we start displaying the UI
 displayTime();
-// not sure if i need this here
-showPersonLeftside();
-goToRoom(town);
+//display the toolbar
+document.getElementById('toolBar').style.display = "flex";
+goToRoom(apartment);
 } else{
   console.log(`Game has not been started`);
 }
