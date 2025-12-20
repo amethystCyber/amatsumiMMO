@@ -159,11 +159,10 @@ body{
 <button class="options" id="storeButton" onclick="goToRoom(cornerStore)">Go to the store</button>
 <button class="options" id="apartmentButton" onclick="goToRoom(apartment)">Go to apartment</button>
 <button class="options" id="townButton" onclick="goToRoom(town)">Go to town</button>
-<button class="options" id="talkToShop" onclick="npcSays()">Chat test</button>
+<button class="options" id="talkToShop" onclick="npcSays(shopkeep)">talk to shop</button>
 </div>
 
 <div id="chatbox">
-This is gonna be a sample conversation so I can see exactly what the text does when I type a lot of stuff into the box and just keep going and going and going
 <div id="nextButton">next</div>
 </div>
 
@@ -224,7 +223,9 @@ let marcelo = {
 
 let shopkeep = {
   name: "Shopkeep",
-  bodyUrl: "url('shopkeep.png')"
+  bodyUrl: "url('shopkeep.png')",
+  index: 0,
+  conversation: ["Greetings", "Hello", "Whassam lil nigga", "Are you new in town I haven't seen you before.."]
 }
 
 const sumiKey = "AmatsumiV1Save";
@@ -311,6 +312,7 @@ if(gameState.timeIndex === 3){
     document.getElementById('townButton').style.display = "none";
     document.getElementById('storeButton').style.display = "flex";
     document.getElementById('apartmentButton').style.display = "flex";
+    showPersonLeftside();
 
   }
   if(gameState.currentroom === "Marcelo's Apartment"){
@@ -378,6 +380,10 @@ function playTextSound(){
 function npcSays(npc){
 document.getElementById('chatbox').style.display = "flex";
 playTextSound();
+document.getElementById('chatbox').innerText = npc.conversation[npc.index];
+if(npc.index >= npc.conversation.length){
+  npc.index = 0;
+}
 }
 
 //this function will start the game and load the UI
