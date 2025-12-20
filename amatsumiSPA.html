@@ -142,6 +142,7 @@ body{
   display: flex;
   font-size: 40px;
 }
+
 </style>
 </head>
 <body>
@@ -378,10 +379,12 @@ function playTextSound(){
 }
 
 function npcSays(npc){
-document.getElementById('chatbox').style.display = "flex";
+const chatbox = document.getElementById('chatbox');
+chatbox.style.display = "flex";
 playTextSound();
-document.getElementById('chatbox').innerText = npc.conversation[npc.index];
-if(npc.index >= npc.conversation.length){
+chatbox.innerText = npc.conversation[npc.index];
+npc.index++;
+if (npc.index >= npc.conversation.length){
   npc.index = 0;
 }
 }
