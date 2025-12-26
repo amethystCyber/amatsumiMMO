@@ -1,0 +1,17 @@
+flow of the game
+
+players turn starts:
+roll some Dice (if you roll higher than a 3 draw 2 cards)
+take a card (some cards move your character, some cards bring a wandering
+trader or store, some have a battle, some you have scenarios and some you find items and some you lose gold)
+
+
+battle flow:
+roll a 3 or higher to attack, anything lower you skip
+enemy does same
+
+if you CAN attack then you roll a 12 sided dye for damage
+
+when an enemy attacks its enemydamageroll - playerdefense for total damage
+
+you win money and xp from battles and your level goes up
