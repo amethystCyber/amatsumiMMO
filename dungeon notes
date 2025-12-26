@@ -15,3 +15,32 @@ if you CAN attack then you roll a 12 sided dye for damage
 when an enemy attacks its enemydamageroll - playerdefense for total damage
 
 you win money and xp from battles and your level goes up
+
+
+const cards = [
+  {
+    name: "Fire Dragon",
+    attack: 10,
+    image: "fire-dragon.png"
+  },
+  {
+    name: "Water Mage",
+    attack: 7,
+    image: "water-mage.png"
+  },
+  {
+    name: "Stone Golem",
+    attack: 12,
+    image: "stone-golem.png"
+  }
+];
+
+
+
+store cards as objects inside of an array then pull from the array 
+by using
+
+
+
+const randomIndex = Math.floor(Math.random() * cardArrayLength);
+return cards[randomIndex];
