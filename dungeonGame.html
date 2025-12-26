@@ -1,0 +1,43 @@
+<html>
+<head>
+<style>
+body{
+background-color: darkslateblue;
+}
+.ui{                                                                                                                                                                      
+background-color: mediumslateblue;
+font-size: 30px;
+}
+.playerBar{
+display: flex;
+flex-direction: row;
+}
+</style>
+<body>
+<div class="ui playerBar" id="player1">
+<p>player 1</p>
+    <button onclick="rollDice(player1)">Roll Dice</button>
+    <button onclick="takeCard(player1)">Take A Card</button>
+    <button>end turn</button>
+</div>
+
+
+<script>
+let player1 = {
+name: "player 1",
+money: 0
+}
+
+function rollDice(player){
+    let randomNumber = Math.floor(Math.random() * 6 + 1);
+    console.log(`${player.name} rolls a ${randomNumber}`);
+
+}
+
+function takeCard(player){
+    console.log(`${player.name} takes a card`);
+}
+</script>
+</body>
+</head>
+</html>
